@@ -33,4 +33,4 @@ jobs:
         uses: azure/setup-helm@v3
 
       - name: Lint Helm charts
-        run: helm lint ./Charts
+        run: helm lint ./charts/lanchonete-chart
