@@ -1,0 +1,27 @@
+variable "region" {
+  description = "AWS region"
+  type        = string
+  default     = "us-east-2"
+}
+
+variable "vpc_id" {
+  description = "VPC ID for the EKS cluster"
+  type        = string
+  default     = "vpc-0e1ce630f1b244174"
+}
+
+variable "subnet_ids" {
+  description = "List of subnet IDs for the EKS cluster"
+  type        = list(string)
+  default = [
+    "subnet-0ec94537bafb5191e",
+    "subnet-0898466d7bedc08fe",
+    "subnet-07ff3047557944fec"
+  ]
+}
+
+variable "instance_types" {
+  description = "List of instance types for the EKS node group"
+  type        = list(string)
+  default     = ["t3.micro"]
+}
