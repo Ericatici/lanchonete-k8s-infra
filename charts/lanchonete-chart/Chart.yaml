@@ -1,0 +1,6 @@
+apiVersion: v2
+name: lanchonete-chart
+description: Helm chart para Lanchonete Na Comanda
+type: application
+version: 0.1.0
+appVersion: "1.0"

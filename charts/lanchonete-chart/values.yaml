@@ -1,0 +1,9 @@
+replicaCount: 1
+
+image:
+  repository: your-docker-repo/lanchonete-app
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 80

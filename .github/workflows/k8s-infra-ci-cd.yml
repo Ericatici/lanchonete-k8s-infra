@@ -1,0 +1,59 @@
+name: K8s Infra CI/CD
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "lanchonete-k8s-infra/**"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "lanchonete-k8s-infra/**"
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0 # Specify a compatible version
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check -recursive lanchonete-k8s-infra/
+        continue-on-error: true
+
+      - name: Terraform validate
+        id: validate
+        run: terraform validate lanchonete-k8s-infra/
+
+      - name: Terraform plan
+        id: plan
+        run: terraform plan -input=false -no-color -out=tfplan lanchonete-k8s-infra/
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -input=false tfplan lanchonete-k8s-infra/
+
+  helm-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+
+      - name: Lint Helm charts
+        run: helm lint ./lanchonete-k8s-infra/charts/lanchonete-chart
