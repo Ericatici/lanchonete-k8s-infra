@@ -1,15 +1,16 @@
 name: K8s Infra CI/CD
 
-# define quando o workflow será executado (push ou pull_request na main)
 on:
   push:
     branches: ["main"]
     paths:
       - "lanchonete-k8s-infra/**"
+      - ".github/workflows/k8s-infra-ci-cd.yml"
   pull_request:
     branches: ["main"]
     paths:
       - "lanchonete-k8s-infra/**"
+      - ".github/workflows/k8s-infra-ci-cd.yml"
 
 # define os jobs (tarefas) que serão executados
 jobs:
@@ -29,7 +30,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.0 # Specify a compatible version
+          terraform_version: 1.5.0
 
       - name: Terraform fmt
         id: fmt
