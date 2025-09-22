@@ -11,6 +11,7 @@ on:
     paths:
       - "lanchonete-k8s-infra/**"
 
+#define os jobs (tarefas) que serão executados
 jobs:
   terraform:
     runs-on: ubuntu-latest
