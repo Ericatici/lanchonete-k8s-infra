@@ -1,6 +1,5 @@
 name: K8s Infra CI/CD
 
-# Workflow triggers
 on:
   push:
     branches: ["main"]
@@ -13,6 +12,7 @@ on:
       - "lanchonete-k8s-infra/**"
       - ".github/workflows/k8s-infra-ci-cd.yml"
 
+# define os jobs (tarefas) que serão executados
 jobs:
   terraform:
     runs-on: ubuntu-latest
