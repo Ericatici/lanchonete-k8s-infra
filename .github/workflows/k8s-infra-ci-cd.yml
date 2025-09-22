@@ -1,5 +1,6 @@
 name: K8s Infra CI/CD
 
+#define quando o workflow será executado (push ou pull_request na main)
 on:
   push:
     branches: ["main"]
