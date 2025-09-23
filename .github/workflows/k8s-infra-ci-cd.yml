@@ -55,4 +55,4 @@ jobs:
           version: v3.10.0 # Specify your desired Helm version
 
       - name: Helm Lint
-        run: helm lint ./lanchonete-k8s-infra/charts/lanchonete-chart
+        run: helm lint ./charts/lanchonete-chart
