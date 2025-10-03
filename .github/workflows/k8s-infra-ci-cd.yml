@@ -29,6 +29,9 @@ jobs:
         with:
           terraform_version: 1.5.0 # Specify a compatible version
 
+      - name: Terraform Init
+        run: terraform init -input=false lanchonete-k8s-infra/
+
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check -recursive lanchonete-k8s-infra/
