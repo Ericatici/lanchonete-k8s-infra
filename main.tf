@@ -1,7 +1,7 @@
 provider "aws" {
   region = var.region
   # Use the default AWS profile from ~/.aws/credentials
-  profile = "default" 
+  #profile = "default" 
 }
 
 resource "aws_eks_cluster" "lanchonete_eks_cluster" {
